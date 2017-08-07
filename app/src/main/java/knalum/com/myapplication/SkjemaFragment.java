@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
@@ -78,7 +79,7 @@ public class SkjemaFragment extends Fragment {
     }
 
     private void loadItemsFromSharedPreferences() {
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("myPreferences",Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         this.ITEMS = sharedPreferences.getStringSet("ITEMS",new HashSet<String>());
     }
 
@@ -89,7 +90,7 @@ public class SkjemaFragment extends Fragment {
 
         FragmentActivity activity = getActivity();
         if( activity != null ){
-            SharedPreferences preferences = getActivity().getSharedPreferences("myPreferences",Context.MODE_PRIVATE);
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
             SharedPreferences.Editor editor = preferences.edit();
             editor.putStringSet("ITEMS",ITEMS);
             editor.apply();
